@@ -1,0 +1,152 @@
+---
+products:
+    new:
+        limit: {{theme_settings.homepage_new_products_count}}
+    featured:
+        limit: {{theme_settings.homepage_featured_products_count}}
+    top_sellers:
+        limit: {{theme_settings.homepage_top_products_count}}
+carousel: {{theme_settings.homepage_show_carousel}}
+blog:
+    recent_posts:
+        limit: {{theme_settings.homepage_blog_posts_count}}
+---
+{{#partial "hero"}}
+    {{#if carousel}}
+        {{> components/carousel}}
+    {{/if}}
+  {{{snippet 'home_content'}}}
+{{/partial}}
+{{#partial "page"}}
+     {{#each shipping_messages}}
+        {{> components/common/alert-info message}}
+    {{/each}}
+    <style>
+.footetlogoblock {
+ display: block !important; 
+}
+    </style>
+<div class="main full">
+    <div class="homecategoryblock ">
+<div id="SideCategoryList" class="CategoryList">
+<div class="BlockContent grid">
+<div class="grid__item one-third feed">
+<a href="/windshields/">
+<img src="http://spikepowersports.com/template/images/Windshields.jpg">
+<span class="classarrowyellow">
+Windshields
+<i></i>
+</span>
+</a>
+</div>
+<div class="grid__item one-third feed ">
+<a href="/roofs/">
+<img src="http://spikepowersports.com/template/images/Roofs.jpg">
+<span class="classarrowyellow">
+Roofs
+<i></i>
+</span>
+</a>
+</div>
+<div class="grid__item one-third feed">
+<a href="/fender-flares/">
+<img src="http://spikepowersports.com/template/images/FenderFlares.jpg">
+<span class="classarrowyellow">
+Fender Flares
+<i></i>
+</span>
+</a>
+</div>
+<div class="grid__item one-third feed">
+<a href="/doors/">
+<img src="http://spikepowersports.com/template/images/Doors.jpg">
+<span class="classarrowyellow">
+Doors
+<i></i>
+</span>
+</a>
+</div>
+<div class="grid__item one-third feed">
+<a href="/lights/">
+<img src="http://spikepowersports.com/template/images/Lights.jpg">
+<span class="classarrowyellow">
+Lights
+<i></i>
+</span>
+</a>
+</div>
+<div class="grid__item one-third feed">
+<a href="/become-a-dealer-1/">
+<img src="http://spikepowersports.com/template/images/BecomeDealer.jpg">
+<span class="classarrowyellow">
+Become A Dealer
+<i></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="home-page-tabs">
+ <div class="tab">
+ {{#if products.new}}<button id="defaultOpen" class="tablinks" onclick="openCity(event, 'newproducts')">New Products</button> {{/if}}
+ {{#if products.featured}}  <button class="tablinks" onclick="openCity(event, 'featured')">Featured Products</button> {{/if}}
+ {{#if products.top_sellers}}  <button class="tablinks" onclick="openCity(event, 'top_sellers')">Most Popular Products</button> {{/if}}
+</div> 
+<div id="newproducts" class="tabcontent">
+  {{#if products.new}}
+        {{> components/products/new products=products.new columns=theme_settings.homepage_new_products_column_count}}
+    {{/if}}
+</div>
+<div id="featured" class="tabcontent">
+ {{#if products.featured}}
+        {{> components/products/featured products=products.featured columns=theme_settings.homepage_featured_products_column_count}}
+    {{/if}}
+</div>
+<div id="top_sellers" class="tabcontent">
+  {{#if products.top_sellers}}
+        {{> components/products/top products=products.top_sellers columns=theme_settings.homepage_top_products_column_count}}
+    {{/if}}
+</div>
+
+</div></div>
+
+{{/partial}}
+
+{{> layout/base}}
+<script>
+document.getElementById("defaultOpen").click();
+function openCity(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+    
+    $("#" + cityName + " .feed").appear({force_process: true}); 
+} 
+</script>
+<style>
+    .body
+    {
+        background-color: transparent;
+         margin: 2.5rem auto 0;
+    }
+    .breadcrumbs
+    {
+    display:none;
+    }
+</style>
